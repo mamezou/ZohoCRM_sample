@@ -1,0 +1,27 @@
+/*
+カスタム関数の基本マニュアル
+
+書き方の参考は以下サイトを参照してください
+https://www.zoho.com/deluge/
+
+*/
+
+/*
+マップを生成、こちらに各項目を書き込んで、元のデータに上書きすることで更新できる。
+*/
+m = Map();
+// 基本
+m.put("項目のAPI名","更新内容");
+// 取引先など、ルックアップ項目を記載する場合
+m.put("AccountName",{"id":accountID});
+
+
+
+/*
+元データのリスト項目を取得し、値に応じて送料を変更するサンプル
+[引数]
+recordID : 商談のID
+*/
+data = zoho.crm.getRecordById("ProductManagements",recordID.toLong());
+mp = Map();
+

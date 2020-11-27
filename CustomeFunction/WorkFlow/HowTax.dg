@@ -1,0 +1,20 @@
+/*
+パーツ
+カスタム関数
+商談完了日を取得して、日付に応じて税率を変更するプログラム
+recordID  = 商談のID
+*/
+data = zoho.crm.getRecordById("Deals",recordID.toLong());
+info data.get("Closing_Date");
+date = data.get("Closing_Date");
+year = Tonumber(Substring(date,0,4));
+month = Tonumber(Substring(date,5,7));
+// 以下2019年の10月から施行された増税に対応するプログラム
+if(year > 2019 || year == 2019 && month > 9)
+{
+	tax = 0.1;
+}
+else
+{
+	tax = 0.08;
+}

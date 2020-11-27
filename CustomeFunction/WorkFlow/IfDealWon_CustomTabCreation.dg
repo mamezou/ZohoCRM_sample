@@ -1,0 +1,26 @@
+/*
+ワークフロー
+実行条件：商談情報のステージが商談成立になった際
+実行回数：一度のみ
+実行詳細：新しくカスタムタブのデータを作成。商談内の情報をカスタムタブデータへ転記。
+商談に作成したカスタムタブデータを記載
+*/
+// 商談のレコード情報を取得
+data = zoho.crm.getRecordById("Deals",DealID.toLong());
+// 制作工程管理タブに転記（CustomTab）
+CustomTabMap = Map();
+CustomTabMap.put("Name",concat("S_",data.get("Deal_Name")));
+/*フェーズ情報*/
+CustomTabMap.put("CustomPhase","商談成立");
+
+/*基本情報*/
+accountID = data.get("AccountName").get("id").toLong();
+contactID = data.get("ContactName").get("id").toLong();
+ownerID = data.get("Owner").get("id").toLong();
+CustomTabMap.put("Owner",{"id":ownerID});
+CustomTabMap.put("AccountName",{"id":accountID});
+CustomTabMap.put("ContactName",{"id":contactID});
+CustomTabMap.put("Deal_Name",{"id":DealID});
+response = zoho.crm.createRecord("CustomTab",CustomTabMap);
+customTabID = response.get("id");
+response2 = zoho.crm.updateRecord("Deals",DealID,{"CustomTab":CustomTabID});

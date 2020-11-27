@@ -1,0 +1,11 @@
+/*
+【引数情報】
+recordID:レコードID
+*/
+// ルックアップの商品から単価と原価を取得
+data = zoho.crm.getRecordById("Deals",recordID.toLong());
+product = data.get("Product");
+productID = product.get("id");
+productData = zoho.crm.getRecordById("Products",productID.toLong());
+unitPrice = productData.get("UnitPrice");
+unitCost = productData.get("UnitCost");

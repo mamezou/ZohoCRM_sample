@@ -1,0 +1,9 @@
+/*
+パーツ
+カスタム関数
+チェックボックスのデータを取得して真偽に応じて割引額を変更
+recordID  = 商談のID
+*/
+data = zoho.crm.getRecordById("Deals",recordID.toLong());
+
+freeQuantity = if(data.get("OneFree"),1,0);

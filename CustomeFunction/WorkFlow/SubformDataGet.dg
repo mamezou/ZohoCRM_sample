@@ -1,0 +1,21 @@
+// 引数
+// recordID  = 商談のID
+m = Map();
+data = zoho.crm.getRecordById("Deals",recordID.toLong());
+// 商談にあるサブフォームを取得
+subform = data.get("サブフォームのAPI名");
+// 一行目を取得する時
+subform01 = subform.get(0);
+product = subform01.get("Product");
+name = product.get("name");
+judge = product.contains("通常");
+if(judge == true)
+{
+	m.put("Printing","通常印刷");
+	info judge;
+}
+else
+{
+	m.put("Printing","特殊印刷");
+	info judge;
+}
